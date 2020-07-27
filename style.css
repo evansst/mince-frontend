@@ -1,7 +1,50 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
 }
 
 .section-1{
@@ -20,10 +63,13 @@ h1{
     margin: 100px 100px;
 } */
 .section-2{
-    background-image: url("images/brooke-lark-lcZ9NxhOSlo-unsplash.jpg");
+    background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
-    height: 200px,
+    max-width:100%;
+    max-height:100%;
+    /* height: 200px; */
+
 }
 
 form{
@@ -37,17 +83,18 @@ form{
     font-family: Palatino;
     color: black;
     font-size: 25px;
-    text-shadow: 2px 0px 2px white;
+    text-shadow: 5px 2px white;
 }
 #ingredients_input{
     color: black;
     font-family: Palatino;
-    font-weight: bold;
+    /* font-weight: bold; */
     margin: 50px 100px;
     height: 30px;
     width: 400px;
     border-style: dotted;
     border-radius: 10px;
+    font-size: 20px;
 }
 
 #submit{
@@ -59,6 +106,13 @@ form{
     background-color: white;
     border-style: dotted;
     border-radius: 10px;
+}
+
+#submit:hover{
+    background-color: #B8D0EB;
+    color: black;
+    cursor: pointer;
+    transform: scale(1.05);
 }
 
 .section-3{
