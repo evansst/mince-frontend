@@ -1,6 +1,13 @@
 baseURL = "http://localhost:3000"
 recipeURL = `${baseURL}/recipes`
 
+const searchParams = new URLSearchParams(window.location.search)
+const searchName = searchParams.get('name')
+
+if (searchName) {
+    recipeURL = `${recipeURL}?name=${searchName}`
+}
+
 fetch(recipeURL)
     .then (response => response.json)
     .then(showRecipes)
