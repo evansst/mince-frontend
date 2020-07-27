@@ -116,10 +116,15 @@ form{
 }
 
 .section-3{
-    padding: 200px 100px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+.cards {
+  margin: 1rem;
+  padding: 1rem;
+  box-shadow: 2px 2px 5px rgb(211, 211, 211);
 }
-
-
 
 
 
