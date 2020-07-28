@@ -10,16 +10,11 @@ if (searchName) {
 
 const $section3 = document.querySelector('.section-3');
 
-const searchParams = new URLSearchParams(window.location.search)
-const searchName = searchParams.get('name')
-
-if (searchName) {
-    recipeURL = `${recipeURL}?name=${searchName}`
-}
 
 fetch(recipeURL)
     .then(parseJSON)
     .then(displayRecipes);
+  
 
 function parseJSON(response) {
   return response.json();
@@ -38,6 +33,8 @@ function recipeToElement(recipe) {
 
   const $r_image = document.createElement('img');
   $r_image.src = recipe.image;
+  // Find way to make image link to show page
+  
 
   
   return createRecipeCard($h3, $r_image);

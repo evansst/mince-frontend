@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+    line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -51,6 +51,7 @@ table {
     background-color: white;
     text-align: center;
     margin: 100px 100px;
+
 }
 h1{
     font-family: Palatino;
@@ -118,15 +119,51 @@ form{
 .section-3{
     display: flex;
     flex-wrap: wrap;
+    margin: 10px 10%;
+   
+  
   }
   
 .cards {
   margin: 1rem;
   padding: 1rem;
   box-shadow: 2px 2px 5px rgb(211, 211, 211);
+  text-align: center;
+  border-radius: 100px;
+  max-width: 300px;
+  max-height: 300px;
+  border-right-color: rgb(247, 144, 196);
 }
 
+img{
+    height: 80%;
+    /* object-fit: contain; */
+    border-radius: 50px;
+}
 
+.cards:hover{
+    transform: scale(1.05);
+    cursor: pointer;
+    /* background-color: Insert here; */
+}
+
+a {
+    text-decoration: none;
+    color: #82a8d3;
+    /* margin: 3px 3px;
+    padding: 3px 3px; */
+    font-family: Palatino;
+    letter-spacing: 2px;
+    font-size-adjust: 0.5;
+}
+
+h3 {
+    margin: 3px 3px 6px;
+    padding: 3px 3px 6px;
+    font-weight: bolder;
+    /* font-family: Palatino; */
+
+}
 
 
 
