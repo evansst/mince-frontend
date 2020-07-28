@@ -12,8 +12,16 @@ function showRecipe(recipe) {
   $h1.innerText = recipe.name;
   $main.append($h1);
 
+  const $r_image = document.createElement('img');
+  $r_image.src = recipe.image;
+  $main.append($r_image)
+
+//   const $s_image = document.createElement('img');
+//   $s_image.src = recipe.image;
+//   $main.append($s_image)
+
   const $p = document.createElement('p');
-  $p.innerHTML = `<a class= 'recipe_url' href ='${recipe.url}'>${recipe.name}</a>`;
+  $p.innerHTML = `<a class= 'recipe_url' href ='${recipe.url}'>Go To Full Recipe</a>`;
   $main.append($p);
   
   const $ul = document.createElement('ul');
@@ -26,6 +34,8 @@ function showRecipe(recipe) {
     $li.className = 'ingredient_list';
     $li.innerHTML = ingredient;
     $ul.append($li);
+
+    
   });
 }
 
