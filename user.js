@@ -1,5 +1,5 @@
 const searchParams = new URLSearchParams(window.location.search);
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
 
 const $main = document.querySelector('main');
 
@@ -8,16 +8,24 @@ userURL = `${baseURL}/users/${user_id}`;
 
 fetch(userURL)
   .then(parseJSON)
-  .then(console.log);
+  .then(displayPage);
 
 function parseJSON(response) {
   return response.json();
 }
 
 function displayPage(user) {
+  displayTitle(user);
   displayHeader(user);
   displayUserInfo(user);
-  displayRecipes(user.recipes);
+  displayRecipeList(user.recipes);
+}
+
+function displayTitle(user) {
+  const $title = document.querySelector('title');
+  $title.textContent = user.username;
+
+  return user;
 }
 
 function displayHeader(user) {
@@ -25,37 +33,35 @@ function displayHeader(user) {
   $h1.textContent = user.name;
 
   $main.append($h1);
+
+  return user;
 }
 
 function displayUserInfo(user) {
+  const $p = document.createElement('p');
+  $p.className = 'favorites_header';
+  $p.textContent = 'Favorite Recipes:';
 
+  $main.append($p);
+
+  return user;
 }
 
-function displayRecipes(recipes) {
-  const $section3 = document.createElement('section');
-  $section3.className = 'section-3';
-  
+function displayRecipeList(recipes) {
+  const $ul = document.createElement('ul');
+  $ul.className = 'recipe_list';
 
-}
+  const $recipes = recipes.map(recipe => {
+    const $li = document.createElement('li');
+    $li.className = 'recipe_list';
+    $li.innerHTML = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
 
-function recipeToElement(recipe) {
-  const $h3 = document.createElement('h3');
-  $h3.innerHTML  = `<a href ='show.html?id=${recipe.id}'>${recipe.name}</a>`;
+    return $li;
+  });
 
-  const $r_image = document.createElement('img');
-  $r_image.src = recipe.image;
-  $r_image.onclick = function() {
-    window.location.href = `show.html?id=${recipe.id}'>${recipe.name}`;
-  };
-  
-  return createRecipeCard($h3, $r_image);
-}
+  $main.append($ul);
+  $recipes.forEach($recipe => {
+    $ul.append($recipe);
+  });
 
-function createRecipeCard($h3, $r_image) {
-  const $recipeCard = document.createElement('div');
-  
-  $recipeCard.className = 'cards';
-  $recipeCard.append($h3, $r_image);
-
-  return $recipeCard;
 }

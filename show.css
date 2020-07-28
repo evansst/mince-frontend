@@ -79,7 +79,7 @@ img{
     /* padding: 10px 300px; */
 }
 
-a {
+a.recipe_url, .favorites_header{
     color: white;
     text-decoration: none;
     font-size: 20px;
