@@ -155,6 +155,7 @@ a {
     font-family: Palatino;
     letter-spacing: 2px;
     font-size-adjust: 0.5;
+    word-wrap: break-word;
 }
 
 h3 {
