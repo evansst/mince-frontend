@@ -35,8 +35,8 @@ function recipeToElement(recipe) {
   $r_image.src = recipe.image;
   $r_image.onclick = function() {
     window.location.href = `show.html?id=${recipe.id}'>${recipe.name}`;
-};
-  // Find way to make image link to show page
+  };
+
   
 
   
