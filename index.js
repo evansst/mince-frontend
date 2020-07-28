@@ -8,6 +8,36 @@ if (searchName) {
     recipeURL = `${recipeURL}?name=${searchName}`;
 }
 
+// // When the user scrolls the page, execute myFunction
+// window.onscroll = function() { bannerScroll() };
+// // Get the header
+// let section2 = document.getElementById("banner");
+// // Get the offset position of the navbar
+// let sticky = section2.offsetBottom;
+// // Add the sticky class to the banner when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function bannerScroll() {
+//   if (window.pageYOffset > sticky) {
+//     banner.classList.add("sticky");
+//   } else {
+//     banner.classList.remove("sticky");
+//   }
+// }
+
+// window.onscroll = function() { formScroll() };
+// // Get the header
+// let form = document.getElementById("filter");
+// // Get the offset position of the navbar
+// let formSticky = form.offsetTop;
+// // Add the sticky class to the banner when you reach its scroll position. Remove "sticky" when you leave the scroll position
+// function formScroll() {
+//   if (window.pageYOffset > formSticky) {
+//     banner.classList.add("formSticky");
+//   } else {
+//     banner.classList.remove("formSticky");
+//   }
+// }
+
+
 const $section3 = document.querySelector('.section-3');
 
 
@@ -55,3 +85,9 @@ function createRecipeCard($h3, $r_image) {
 function showRecipes($recipeCard) {
   $section3.append($recipeCard);
 }
+
+window.scroll({
+  top: 100,
+  left: 100,
+  behavior: 'smooth'
+});
