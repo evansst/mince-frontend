@@ -1,11 +1,12 @@
 const searchParams = new URLSearchParams(window.location.search);
-let user_id = searchParams.get('user_id');
+const user_id = searchParams.get('user_id');
 
+const $header = document.querySelector('header');
 const $main = document.querySelector('main');
-$main.className = "user_page"
+$main.className = "user_page";
 
-baseURL = "http://localhost:3000";
-userURL = `${baseURL}/users/${user_id}`;
+const baseURL = "http://localhost:3000";
+const userURL = `${baseURL}/users/${user_id}`;
 
 fetch(userURL)
   .then(parseJSON)
@@ -16,6 +17,7 @@ function parseJSON(response) {
 }
 
 function displayPage(user) {
+  displayHomeLink();
   displayTitle(user);
   displayHeader(user);
 
@@ -28,6 +30,15 @@ function displayPage(user) {
     displayList(user.shopping_list.ingredients, false);
   }
 
+}
+
+function displayHomeLink() {
+  const $a = document.createElement('a');
+  $a.href = `index.html?user_id=${user_id}`;
+  $a.textContent = 'Go to Homepage';
+
+  const $ul = document.querySelector('ul.nav-bar');
+  $ul.append($a); 
 }
 
 function displayTitle(user) {

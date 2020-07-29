@@ -48,6 +48,8 @@ function parseJSON(response) {
 }
 
 function displayPage(recipes) {
+  displayProfileLink();
+
   $filterForm.innerHTML = `  
       <label for='ingredients_input' id='ingredients_header'>Let's Begin! Search Recipes below:</label>
       <input type='text' id='ingredients_input' name='name'>
@@ -67,6 +69,18 @@ function displayPage(recipes) {
      };
   }
   return recipes;
+}
+
+function displayProfileLink() {
+  const $a = document.createElement('a');
+  $a.href = `user.html?user_id=${user_id}`;
+  $a.textContent = 'Go to Profile';
+
+  const $ul = document.querySelector('ul.nav-bar');
+
+  if (user_id) {
+    $ul.append($a);
+  }
 }
 
 // Render filtered or sampled recipes
@@ -144,7 +158,7 @@ function userToOption(user) {
 
 function displayLogOut(user) {
   const $p = document.createElement('p');
-  $p.innerHTML = `Logged in as <a href=user.html?user_id=${user.id}>${user.user_name}</a> <br> <a href='index.html'>Log Out</a>`;
+  $p.innerHTML = `Logged in as ${user.user_name} <br> <a href='index.html'>Log Out</a>`;
 
   $section1.append($p);
 

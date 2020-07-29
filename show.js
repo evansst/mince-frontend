@@ -2,19 +2,55 @@ const searchParams = new URLSearchParams(window.location.search);
 const recipe_id = searchParams.get('recipe_id');
 const user_id = searchParams.get('user_id');
 
+const baseURL = "http://localhost:3000";
+const recipeURL = `${baseURL}/recipes/${recipe_id}`;
+const userURL = `${baseURL}/users/${user_id}`;
+const recipe_cardURL = `${baseURL}/recipe_cards`;
+
+const $header = document.querySelector('header');
 const $main = document.querySelector('main');
 
-fetch(`http://localhost:3000/recipes/${recipe_id}`)
-    .then(response => response.json())
-    .then(showPage);
+
+fetch(recipeURL)
+    .then(parseJSON)
+    .then(displayPage);
 
 
-function showPage(recipe) {
+function parseJSON(response) {
+  return response.json();
+}
+
+
+function displayPage(recipe) {
+  displayProfileLink();
+  displayHomeLink();
   displayHeader(recipe);
   displayImage(recipe);
   displayRecipeURL(recipe);
+  displayFavoriteButton(recipe);
   displayIngredientList(recipe);
     
+}
+
+function displayProfileLink() {
+  const $a = document.createElement('a');
+  $a.href = `user.html?user_id=${user_id}`;
+  $a.textContent = 'Go to Profile';
+
+  const $ul = document.querySelector('ul.nav-bar');
+
+  if (user_id) {
+    $ul.append($a);
+  }
+}
+
+function displayHomeLink() {
+  const $a = document.createElement('a');
+  $a.href = `index.html?user_id=${user_id}`;
+  $a.textContent = 'Go to Homepage';
+
+  const $ul = document.querySelector('ul.nav-bar');
+  $ul.append($a); 
 }
 
 function displayHeader(recipe) {
@@ -64,14 +100,20 @@ function displayIngredientList(recipe) {
     //     document.getElementById("button").style.backgroundColor = "red";
     //   };
 
-    $li.append($button);
+    if (user_id) {
+      $li.append($button);
+    }
 
     $button.onclick = function(){
-        list = [];
-        list.push($li.innerText);
-        const $h5 = document.createElement('h5');
-        $h5.innerText  = list;
-        $main.append($h5);
+      const data = { shopping_list: ingredient };
+
+      fetch(userURL, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
     };
     return $li;
   });    
@@ -82,6 +124,35 @@ function displayIngredientList(recipe) {
   });
 
   return recipe;
+}
+
+function displayFavoriteButton(recipe) {
+  const $button = document.createElement('button');
+
+  $button.className = 'button';
+  $button.id = 'favorite_button';
+  $button.innerText = 'Add to Favorites';
+
+  if (user_id) {
+    $main.append($button);
+  }
+
+  $button.onclick = function () {
+    const data = {
+      user_id: parseInt(user_id),
+      recipe_id: recipe.id
+     };
+
+     console.log(data);
+    
+    fetch(recipe_cardURL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(data),
+    });
+  };
 }
 
 
