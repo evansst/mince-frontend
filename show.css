@@ -50,6 +50,7 @@ table {
 body{
     background-image: url("/images/fruit_show_page.jpg");
     background-size: cover;
+    background-attachment: fixed;
 }
 
 main{
@@ -64,7 +65,23 @@ h1 {
     font-size: 40px;
     letter-spacing: 3px;
     margin: 20px 20px;
+    /* max-width: 20em;
+    text-align: right; */
+    /* word-wrap: break-word; */
     /* padding: 20px 20px; */
+}
+
+h2{
+    font-family: Palatino;
+    font-size: 20px;
+    letter-spacing: 3px;
+    margin: 10px 10px;
+}
+
+h5{
+    font-size: 18px;
+    margin: 8px 8px;
+    padding: 3px 5px;
 }
 
 p {
@@ -79,13 +96,20 @@ img{
     /* padding: 10px 300px; */
 }
 
-a.recipe_url, .favorites_header{
+a{
     color: white;
     text-decoration: none;
     font-size: 20px;
     font-weight: bold;
     text-shadow: 1px 0px 2px black;
 }
+/* a.recipe_url, .favorites_header{
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 0px 2px black;
+} */
 
 a:hover {
     text-transform: uppercase;
