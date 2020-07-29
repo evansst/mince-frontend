@@ -8,7 +8,9 @@ let recipeURL = `${baseURL}/recipes`;
 
 
 if (searchName) {
-    recipeURL = `${recipeURL}?name=${searchName}`;
+  recipeURL = `${recipeURL}?name=${searchName}`;
+} else {
+  recipeURL = `${recipeURL}?sample=9`;
 }
 
 const $section3 = document.querySelector('.section-3');
@@ -16,7 +18,8 @@ const $section3 = document.querySelector('.section-3');
 
 fetch(recipeURL)
     .then(parseJSON)
-    .then(displayPage);
+    .then(displayPage)
+    .then(console.log);
   
 
 function parseJSON(response) {
@@ -31,6 +34,7 @@ function displayPage(recipes) {
   if (searchName) {
     document.getElementById('ingredients_input').placeholder = searchName;
   }
+  return recipes;
 }
 
     
