@@ -17,8 +17,10 @@ function parseJSON(response) {
 function displayPage(user) {
   displayTitle(user);
   displayHeader(user);
-  displayUserInfo(user);
+  displaySectionHeader('Favorite Recipes', user);
   displayRecipeList(user.recipes);
+  displaySectionHeader('Shopping List', user);
+  // displayRecipeList(user.recipes);
 }
 
 function displayTitle(user) {
@@ -37,10 +39,10 @@ function displayHeader(user) {
   return user;
 }
 
-function displayUserInfo(user) {
+function displaySectionHeader(headerString, user) {
   const $p = document.createElement('p');
   $p.className = 'favorites_header';
-  $p.textContent = 'Favorite Recipes:';
+  $p.textContent = `${headerString}:`;
 
   $main.append($p);
 

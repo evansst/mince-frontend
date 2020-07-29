@@ -56,7 +56,7 @@ function displayIngredientList(recipe) {
 
     const $button = document.createElement('button');
     $button.className = 'button';
-    $button.id= 'button';
+    $button.id = 'button';
     $button.innerText = '+';
 
     // Get button to change color when clicked
