@@ -1,6 +1,6 @@
 const searchParams = new URLSearchParams(window.location.search); 
 const recipe_id = searchParams.get('recipe_id');
-let user_id = searchParams.get('user_id');
+const user_id = searchParams.get('user_id');
 
 const $main = document.querySelector('main');
 

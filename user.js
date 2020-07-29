@@ -17,10 +17,16 @@ function parseJSON(response) {
 function displayPage(user) {
   displayTitle(user);
   displayHeader(user);
+
   displaySectionHeader('Favorite Recipes', user);
-  displayRecipeList(user.recipes);
+  if (user.recipes) {
+    displayList(user.recipes, true);
+  }
   displaySectionHeader('Shopping List', user);
-  // displayRecipeList(user.recipes);
+  if (user.shopping_list.ingredients) {
+    displayList(user.shopping_list.ingredients, false);
+  }
+
 }
 
 function displayTitle(user) {
@@ -49,21 +55,25 @@ function displaySectionHeader(headerString, user) {
   return user;
 }
 
-function displayRecipeList(recipes) {
+function displayList(list, links) {
   const $ul = document.createElement('ul');
-  $ul.className = 'recipe_list';
+  $ul.className = `item_list_${links}`;
 
-  const $recipes = recipes.map(recipe => {
+  const $list = list.map(list_item => {
     const $li = document.createElement('li');
-    $li.className = 'recipe_list';
-    $li.innerHTML = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
+    $li.className = `item_list_${links}`;
+    if (links) {
+      $li.innerHTML = `<a href ='show.html?recipe_id=${list_item.id}&user_id=${user_id}'>${list_item.name}</a>`;
+    } else {
+      $li.innerText = list_item;
+    }
 
     return $li;
   });
 
   $main.append($ul);
-  $recipes.forEach($recipe => {
-    $ul.append($recipe);
+  $list.forEach($list => {
+    $ul.append($list);
   });
 
 }
