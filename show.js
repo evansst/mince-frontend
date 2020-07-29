@@ -48,9 +48,10 @@ function showRecipe(recipe) {
         const $h5 = document.createElement('h5');
         $h5.innerText  = list;
         $main.append($h5)
+
+
         
     };
-    
     
 });
 }

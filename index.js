@@ -8,36 +8,6 @@ if (searchName) {
     recipeURL = `${recipeURL}?name=${searchName}`;
 }
 
-// When the user scrolls the page, execute myFunction
-window.onscroll = function() { titleScroll() };
-// Get the header
-let section1 = document.getElementById("title");
-// Get the offset position of the navbar
-let sticky = section1.offsetTop;
-// Add the sticky class to the banner when you reach its scroll position. Remove "sticky" when you leave the scroll position
-function titleScroll() {
-  if (window.pageYOffset > sticky) {
-    title.classList.add("sticky");
-  } else {
-    title.classList.remove("sticky");
-  }
-}
-
-// window.onscroll = function() { formScroll() };
-// // Get the header
-// let form = document.getElementById("filter");
-// // Get the offset position of the navbar
-// let formSticky = form.offsetTop;
-// // Add the sticky class to the banner when you reach its scroll position. Remove "sticky" when you leave the scroll position
-// function formScroll() {
-//   if (window.pageYOffset > formSticky) {
-//     banner.classList.add("formSticky");
-//   } else {
-//     banner.classList.remove("formSticky");
-//   }
-// }
-
-
 const $section3 = document.querySelector('.section-3');
 
 
