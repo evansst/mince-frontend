@@ -2,6 +2,7 @@ const searchParams = new URLSearchParams(window.location.search);
 let user_id = searchParams.get('user_id');
 
 const $main = document.querySelector('main');
+$main.className = "user_page"
 
 baseURL = "http://localhost:3000";
 userURL = `${baseURL}/users/${user_id}`;
@@ -40,11 +41,11 @@ function displayHeader(user) {
 }
 
 function displaySectionHeader(headerString, user) {
-  const $p = document.createElement('p');
-  $p.className = 'favorites_header';
-  $p.textContent = `${headerString}:`;
+  const $h2 = document.createElement('h2');
+  $h2.className = 'favorites_header';
+  $h2.textContent = `${headerString}:`;
 
-  $main.append($p);
+  $main.append($h2);
 
   return user;
 }
@@ -52,13 +53,36 @@ function displaySectionHeader(headerString, user) {
 function displayRecipeList(recipes) {
   const $ul = document.createElement('ul');
   $ul.className = 'recipe_list';
-
+  
   const $recipes = recipes.map(recipe => {
     const $li = document.createElement('li');
     $li.className = 'recipe_list';
     $li.innerHTML = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
+    
+    recipe.ingredients.map(ingredient => {
+      const $p = document.createElement('p')
+      $p.className = 'ingredient_list';
+      $p.innerText = ingredient
+      $li.append($p);
 
+      const $button = document.createElement('button');
+      $button.className = 'button';
+      $button.id = 'button';
+      $button.innerText = '+';
+      $p.append($button);
+
+      $button.onclick = function(){
+        list = [];
+        list.push($p.innerText);
+        const $h5 = document.createElement('h5');
+        $h5.innerText  = list;
+        $main.append($h5);
+    };
+    })
+      
+    
     return $li;
+
   });
 
   $main.append($ul);
@@ -67,3 +91,5 @@ function displayRecipeList(recipes) {
   });
 
 }
+
+
