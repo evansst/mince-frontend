@@ -1,7 +1,11 @@
 
 const searchParams = new URLSearchParams(window.location.search);
 const searchName = searchParams.get('name');
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+
+if (user_id == 'null') { user_id = null; }
+
+
 
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;

@@ -1,6 +1,8 @@
 const searchParams = new URLSearchParams(window.location.search); 
 const recipe_id = searchParams.get('recipe_id');
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+
+if (user_id == 'null') { user_id = null; }
 
 const baseURL = "http://localhost:3000";
 const recipeURL = `${baseURL}/recipes/${recipe_id}`;
@@ -133,7 +135,10 @@ function displayFavoriteButton(recipe) {
   $button.id = 'favorite_button';
   $button.innerText = 'Add to Favorites';
 
+
   if (user_id) {
+    console.log(user_id);
+
     $main.append($button);
   }
 
@@ -142,8 +147,6 @@ function displayFavoriteButton(recipe) {
       user_id: parseInt(user_id),
       recipe_id: recipe.id
      };
-
-     console.log(data);
     
     fetch(recipe_cardURL, {
       method: 'POST',
