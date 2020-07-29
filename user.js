@@ -58,49 +58,59 @@ function displaySectionHeader(headerString, user) {
 
 function displayList(list, links) {
   const $ul = document.createElement('ul');
-// <<<<<<< n.b
-  $ul.className = 'recipe_list';
-  
-  const $recipes = recipes.map(recipe => {
-    const $li = document.createElement('li');
-    $li.className = 'recipe_list';
-    $li.innerHTML = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
-    
-    recipe.ingredients.map(ingredient => {
-      const $p = document.createElement('p')
-      $p.className = 'ingredient_list';
-      $p.innerText = ingredient
-      $li.append($p);
-
-      const $button = document.createElement('button');
-      $button.className = 'button';
-      $button.id = 'button';
-      $button.innerText = '+';
-      $p.append($button);
-
-      $button.onclick = function(){
-        list = [];
-        list.push($p.innerText);
-        const $h5 = document.createElement('h5');
-        $h5.innerText  = list;
-        $main.append($h5);
-    };
-    })
-      
-    
-// =======
   $ul.className = `item_list_${links}`;
 
   const $list = list.map(list_item => {
     const $li = document.createElement('li');
     $li.className = `item_list_${links}`;
+    
     if (links) {
       $li.innerHTML = `<a href ='show.html?recipe_id=${list_item.id}&user_id=${user_id}'>${list_item.name}</a>`;
+
+      list_item.ingredients.forEach(ingredient => {
+        const $p = document.createElement('p');
+        $p.className = 'ingredient_list';
+        $p.innerText = ingredient;
+        $li.append($p);
+  
+        const $button = document.createElement('button');
+        $button.className = 'button';
+        $button.id = 'button';
+        $button.innerText = '+';
+        $p.append($button);
+  
+        $button.onclick = function(){
+
+          const data = { shopping_list: ingredient };
+
+          fetch(userURL, {
+            method: 'PUT',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+          })
+            .then(parseJSON)
+            .then(user => {
+              const $newIngredient = document.createElement('li');
+              const ingredients = user.shopping_list.ingredients;
+              const $ingredientList = document.querySelector('.item_list_false');
+
+              $newIngredient.textContent = ingredients[ingredients.length -1];
+
+              $ingredientList.append($newIngredient);
+
+            });
+
+        };
+      });   
+
     } else {
       $li.innerText = list_item;
+
     }
 
-// >>>>>>> master
+  
     return $li;
 
   });
