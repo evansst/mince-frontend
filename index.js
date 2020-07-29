@@ -1,7 +1,7 @@
 
 const searchParams = new URLSearchParams(window.location.search);
 const searchName = searchParams.get('name');
-let user_id = searchParams.get('user_id');
+const user_id = searchParams.get('user_id');
 
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;
@@ -16,17 +16,21 @@ const $section3 = document.querySelector('.section-3');
 
 fetch(recipeURL)
     .then(parseJSON)
-    .then(displayRecipes);
+    .then(displayPage);
   
 
 function parseJSON(response) {
   return response.json();
 }
 
-function displayRecipes(recipes) {
+function displayPage(recipes) {
   recipes
     .map(recipeToElement)
     .forEach(showRecipes);
+  
+  if (searchName) {
+    document.getElementById('ingredients_input').placeholder = searchName;
+  }
 }
 
     
