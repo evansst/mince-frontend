@@ -23,6 +23,9 @@ const $section1 = document.querySelector('.section-1');
 const $section2 = document.querySelector('.section-2');
 const $section3 = document.querySelector('.section-3');
 
+const $ingredient_input = document.getElementById('ingredients_input');
+const $filterForm = document.querySelector('.form');
+
 if (user_id) {
   userURL = `${userURL}/${user_id}`;
   fetch(userURL)
@@ -45,12 +48,23 @@ function parseJSON(response) {
 }
 
 function displayPage(recipes) {
+  $filterForm.innerHTML = `  
+      <label for='ingredients_input' id='ingredients_header'>Let's Begin! Search Recipes below:</label>
+      <input type='text' id='ingredients_input' name='name'>
+      <input type="hidden" name='user_id' value=${user_id}>
+      <input type="submit" id='submit' value="Submit">
+    `;
+
   recipes
     .map(recipeToElement)
     .forEach(showRecipes);
   
   if (searchName) {
-    document.getElementById('ingredients_input').placeholder = searchName;
+     $ingredient_input.placeholder = searchName;
+
+     $ingredient_input.onclick = function() {
+       $ingredient_input.placeholder = '';
+     };
   }
   return recipes;
 }
@@ -86,11 +100,11 @@ function showRecipes($recipeCard) {
 
 // What is this?
 
-window.scroll({
-  top: 100,
-  left: 100,
-  behavior: 'smooth'
-});
+// window.scroll({
+//   top: 100,
+//   left: 100,
+//   behavior: 'smooth'
+// });
 
 // User controls in header
 
