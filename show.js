@@ -52,9 +52,29 @@ function displayIngredientList(recipe) {
     const $li = document.createElement('li');
     $li.className = 'ingredient_list';
     $li.innerHTML = ingredient;
-    
+    $ul.append($li);
+
+    const $button = document.createElement('button')
+    $button.className = 'button';
+    $button.id= 'button';
+    $button.innerText = '+'
+
+    // Get button to change color when clicked
+    // $button.onclick = function() {
+    //     document.getElementById("button").style.backgroundColor = "red";
+    //   };
+    $li.append($button)
+
+    $button.onclick = function(){
+        list = []
+        list.push($li.innerText)
+        const $h5 = document.createElement('h5');
+        $h5.innerText  = list;
+        $main.append($h5)
+    };
+  });    
     return $li;
-  });
+});
 
   $main.append($ul);
   $ingredients.forEach($ingredient => {
