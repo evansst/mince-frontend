@@ -1,8 +1,11 @@
-baseURL = "http://localhost:3000";
-recipeURL = `${baseURL}/recipes`;
 
 const searchParams = new URLSearchParams(window.location.search);
 const searchName = searchParams.get('name');
+let user_id = searchParams.get('user_id');
+
+const baseURL = "http://localhost:3000";
+let recipeURL = `${baseURL}/recipes`;
+
 
 if (searchName) {
     recipeURL = `${recipeURL}?name=${searchName}`;
@@ -29,17 +32,14 @@ function displayRecipes(recipes) {
     
 function recipeToElement(recipe) {
   const $h3 = document.createElement('h3');
-  $h3.innerHTML  = `<a href ='show.html?id=${recipe.id}'>${recipe.name}</a>`;
+  $h3.innerHTML  = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
 
   const $r_image = document.createElement('img');
   $r_image.src = recipe.image;
   $r_image.onclick = function() {
-    window.location.href = `show.html?id=${recipe.id}'>${recipe.name}`;
+    window.location.href = `show.html?recipe_id=${recipe.id}&user_id=${user_id}`;
   };
 
-  
-
-  
   return createRecipeCard($h3, $r_image);
 }
 
