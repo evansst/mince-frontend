@@ -16,10 +16,6 @@ function showRecipe(recipe) {
   $r_image.src = recipe.image;
   $main.append($r_image)
 
-//   const $s_image = document.createElement('img');
-//   $s_image.src = recipe.image;
-//   $main.append($s_image)
-
   const $p = document.createElement('p');
   $p.innerHTML = `<a class= 'recipe_url' href ='${recipe.url}'>Go To Full Recipe</a>`;
   $main.append($p);
@@ -35,8 +31,28 @@ function showRecipe(recipe) {
     $li.innerHTML = ingredient;
     $ul.append($li);
 
+    const $button = document.createElement('button')
+    $button.className = 'button';
+    $button.id= 'button';
+    $button.innerText = '+'
+
+    // Get button to change color when clicked
+    // $button.onclick = function() {
+    //     document.getElementById("button").style.backgroundColor = "red";
+    //   };
+    $li.append($button)
+
+    $button.onclick = function(){
+        list = []
+        list.push($li.innerText)
+        const $h5 = document.createElement('h5');
+        $h5.innerText  = list;
+        $main.append($h5)
+        
+    };
     
-  });
+    
+});
 }
 
 
