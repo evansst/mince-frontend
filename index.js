@@ -5,19 +5,12 @@ let user_id = searchParams.get('user_id');
 
 if (user_id == 'null') { user_id = null; }
 
-
-
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;
-let userURL = `${baseURL}/users/`;
+let userURL = `${baseURL}/users`;
 
-
-
-
-// Logic so we can still have the back-end controller return all recipes if we want
-
-recipeURL = (searchName) ?
-   `${recipeURL}?name=${searchName}` : `${recipeURL}?sample=9`;
+if (searchName) { recipeURL = `${recipeURL}?name=${searchName}`; } else { recipeURL = `${recipeURL}?sample=9`; }
+if (user_id) { userURL = `${userURL}/${user_id}`; }
 
 const $section1 = document.querySelector('.section-1');
 const $section2 = document.querySelector('.section-2');
@@ -26,25 +19,25 @@ const $section3 = document.querySelector('.section-3');
 const $ingredient_input = document.getElementById('ingredients_input');
 const $filterForm = document.querySelector('.form');
 
-if (user_id) {
-  userURL = `${userURL}/${user_id}`;
-  fetch(userURL)
-    .then(parseJSON)
-    .then(displayLogOut);
-} else {
-  fetch(userURL)
-    .then(parseJSON)
-    .then(displayLogIn);
-}
-
+fetch(userURL)
+  .then(parseJSON)
+  .then(displayUserNav);
 
 fetch(recipeURL)
     .then(parseJSON)
     .then(displayPage);
-  
-
+    
+    
 function parseJSON(response) {
   return response.json();
+}
+
+function displayUserNav(userResponse) {
+  if (user_id) {
+    displayLogOut(userResponse);
+  } else {
+    displayLogIn(userResponse);
+  }
 }
 
 function displayPage(recipes) {
@@ -121,6 +114,7 @@ function showRecipes($recipeCard) {
 // });
 
 // User controls in header
+
 
 function displayLogIn(users) {
   const $form = document.createElement('form');

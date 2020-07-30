@@ -24,12 +24,12 @@ function parseJSON(response) {
 
 
 function displayPage(recipe) {
-  displayProfileLink();
+  if (user_id) { displayProfileLink(); }
   displayHomeLink();
   displayHeader(recipe);
   displayImage(recipe);
   displayRecipeURL(recipe);
-  displayFavoriteButton(recipe);
+  if (user_id) { displayFavoriteButton(recipe); }
   displayIngredientList(recipe);
     
 }
@@ -40,10 +40,8 @@ function displayProfileLink() {
   $a.textContent = 'Go to Profile';
 
   const $ul = document.querySelector('ul.nav-bar');
-
-  if (user_id) {
-    $ul.append($a);
-  }
+  
+  $ul.append($a);
 }
 
 function displayHomeLink() {
@@ -86,67 +84,74 @@ function displayIngredientList(recipe) {
   const $ul = document.createElement('ul');
   $ul.className = 'ingredient_list';
   
-  const $ingredients = recipe.ingredients.map(ingredient => {
-    const $li = document.createElement('li');
-    $li.className = 'ingredient_list';
-    $li.innerHTML = ingredient;
-    $ul.append($li);
+  const $ingredients = recipe.ingredients.map(ingredientToElement);
 
-    const $button = document.createElement('button');
-    $button.className = 'button';
-    $button.id = 'button';
-    $button.innerText = '+';
-
-    // Get button to change color when clicked
-    // $button.onclick = function() {
-    //     document.getElementById("button").style.backgroundColor = "red";
-    //   };
-
-    if (user_id) {
-      $li.append($button);
-    }
-
-    $button.onclick = function(){
-      const data = { shopping_list: ingredient };
-
-      fetch(userURL, {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-    };
-    return $li;
-  });    
-
-  $main.append($ul);
+  if (user_id) { $ingredients.forEach(createIngredientButton); }
+  
   $ingredients.forEach($ingredient => {
     $ul.append($ingredient);
   });
-
+  
+  $main.append($ul);
   return recipe;
 }
 
-function displayFavoriteButton(recipe) {
+function ingredientToElement(ingredient) {
+  const $li = document.createElement('li');
+  $li.className = 'ingredient_list';
+  $li.textContent = ingredient;
+  
+  return $li;
+}
+  
+function createIngredientButton($ingredient) {
   const $button = document.createElement('button');
+  
+  $button.className = 'button';
+  $button.id = 'button';
+  $button.innerText = '+';
+  
+  addIngredientEvent($button, $ingredient.textContent);
+  
+  $ingredient.append($button); 
+}
+  
+function addIngredientEvent($button, ingredient) {
+  $button.onclick = function(){
+    const data = { shopping_list: ingredient };
+    
+    fetch(userURL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  };
+}
 
+function displayFavoriteButton(recipe) {
+  const $button = createFavoritebutton(recipe);
+  
+  $main.append($button);
+}
+
+function createFavoritebutton(recipe) {
+  const $button = document.createElement('button');
+  
   $button.className = 'button';
   $button.id = 'favorite_button';
   $button.innerText = 'Add to Favorites';
+  
+  return addFavoriteEvent($button, recipe);
+}
 
-
-  if (user_id) {
-    console.log(user_id);
-
-    $main.append($button);
-  }
-
+function addFavoriteEvent($button, recipe) {
   $button.onclick = function () {
     const data = {
       user_id: parseInt(user_id),
       recipe_id: recipe.id
-     };
+    };
     
     fetch(recipe_cardURL, {
       method: 'POST',
@@ -156,6 +161,7 @@ function displayFavoriteButton(recipe) {
       body: JSON.stringify(data),
     });
   };
+  return $button;
 }
 
 

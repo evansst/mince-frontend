@@ -1,12 +1,15 @@
 const searchParams = new URLSearchParams(window.location.search);
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+
+if (user_id == 'null') { user_id = null; }
+
+const baseURL = "http://localhost:3000";
+const userURL = `${baseURL}/users/${user_id}`;
 
 const $header = document.querySelector('header');
 const $main = document.querySelector('main');
 $main.className = "user_page";
 
-const baseURL = "http://localhost:3000";
-const userURL = `${baseURL}/users/${user_id}`;
 
 fetch(userURL)
   .then(parseJSON)
