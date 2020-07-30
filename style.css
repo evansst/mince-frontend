@@ -25,7 +25,7 @@ time, mark, audio, video {
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
+footer, hgroup, menu, nav, section {
     display: block;
 }
 body {
@@ -49,10 +49,6 @@ table {
 
 /* END OF MEYER RESET */
 
-
-header {
-  display: block;
-}
 .nav-bar a{
     text-decoration: none;
     /* color: #2eb7cf; */
@@ -71,26 +67,37 @@ header {
     border-top: 4px solid black;
     text-transform: none;
 }
+header {
+  display: flex;
+  justify-content: center;
+  justify-content: space-between;
+}
 
-div.nav-bar{
+.nav-bar{
     margin-top: 20px;
     font-weight: bold;
     text-decoration: none;
     margin: 20px 20px;
     white-space: nowrap;
     padding: 20px;
-    width: 40%
-}
-
-div#page-nav{
-    display: inline-block;
-    text-align: left;
 }
   
-div#user-nav{
-    display: inline-block;
-    text-align: right;
+div#page-nav{
+  display: flex;
+  justify-content: flex-start;
 }
+
+div#user-nav{
+  display: flex;
+  justify-content: flex-end;
+  flex-flow: column wrap;
+}
+div#user-nav > a, p {
+  display: flex;
+  justify-content: flex-end;
+}
+
+
 
 
 
