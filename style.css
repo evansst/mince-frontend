@@ -16,7 +16,7 @@ article, aside, canvas, details, embed,
 figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-	margin: 0;
+    margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
@@ -26,29 +26,73 @@ time, mark, audio, video {
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
-	display: block;
+    display: block;
 }
 body {
     line-height: 1;
 }
 ol, ul {
-	list-style: none;
+    list-style: none;
 }
 blockquote, q {
-	quotes: none;
+    quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-	content: '';
+    content: '';
 	content: none;
 }
 table {
-	border-collapse: collapse;
+    border-collapse: collapse;
 	border-spacing: 0;
 }
 
-
 /* END OF MEYER RESET */
+
+.nav-bar a{
+    text-decoration: none;
+    /* color: #2eb7cf; */
+    font-family: Palatino;
+    font-size: 17px;
+    letter-spacing: 2px;
+    font-size-adjust: 0.5;
+    word-wrap: break-word;
+    text-shadow: 0px 0px 0px;
+    color: rgb(157, 211, 157);
+   
+}
+ul.nav-bar{
+    margin-top: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 20px;
+}
+
+.nav-bar a:hover{
+    color: #287f8f;
+    border-top: 4px solid black;
+    text-transform: none;
+}
+
+p a{
+    color: rgb(157, 211, 157);
+    font-weight: bold;
+}
+
+p a:hover{
+    color: #287f8f;
+    font-weight: bolder;
+}
+
+a{
+    text-decoration: none;
+    /* color: #82a8d3; */
+    color: rgb(145, 211, 145);
+    font-family: Palatino;
+    letter-spacing: 2px;
+    font-size-adjust: 0.5;
+    word-wrap: break-word;
+}
 
 .section-1{
     background-color: white;
@@ -62,23 +106,21 @@ h1{
     letter-spacing: 10px;
 }
 
+a{
+    padding-top: 200px;
+}
+
 .section-2{
     background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     max-width:100%;
     max-height:100%;
-    /* height: 200px; */
 }
 
-/* .sticky{
-    position: fixed;
-    top: 0;
-    width: 100%;
-    max-height: 10%;
-    background-size: cover;
+/* form{
+    width: 90%;
 } */
-
 
 #filter{
     text-align: center;
@@ -86,27 +128,19 @@ h1{
     padding: 100px 100px;
 }
 
-/* .formSticky{
-    font-size: 8px;
-    position: fixed;
-    top: 0;
-    width: 100%;
-    max-height: 10%;
-    /* background-size: cover; */
-/* } */
-
 #ingredients_header{
     font-weight: bolder;
     font-family: Palatino;
     color: black;
     font-size: 25px;
     text-shadow: 5px 2px white;
+    display: unset;
 }
 #ingredients_input{
     color: black;
     font-family: Palatino;
     /* font-weight: bold; */
-    margin: 50px 100px;
+    margin: 50px 50px;
     height: 30px;
     width: 400px;
     border-style: dotted;
@@ -136,8 +170,6 @@ h1{
     display: flex;
     flex-wrap: wrap;
     margin: 10px 10%;
-   
-  
   }
   
 .cards {
@@ -161,17 +193,9 @@ img{
     cursor: pointer;
 }
 
-a {
-    text-decoration: none;
-    color: #82a8d3;
-    font-family: Palatino;
-    letter-spacing: 2px;
-    font-size-adjust: 0.5;
-    word-wrap: break-word;
-}
-
 h3 {
     margin: 3px 3px 6px;
     padding: 3px 3px 6px;
     font-weight: bolder;
 }
+
