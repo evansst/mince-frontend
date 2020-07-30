@@ -49,6 +49,10 @@ table {
 
 /* END OF MEYER RESET */
 
+
+header {
+  display: block;
+}
 .nav-bar a{
     text-decoration: none;
     /* color: #2eb7cf; */
@@ -61,18 +65,34 @@ table {
     color: rgb(157, 211, 157);
    
 }
-ul.nav-bar{
-    margin-top: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    margin: 20px 20px;
-}
 
 .nav-bar a:hover{
     color: #287f8f;
     border-top: 4px solid black;
     text-transform: none;
 }
+
+div.nav-bar{
+    margin-top: 20px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 20px 20px;
+    white-space: nowrap;
+    padding: 20px;
+    width: 40%
+}
+
+div#page-nav{
+    display: inline-block;
+    text-align: left;
+}
+  
+div#user-nav{
+    display: inline-block;
+    text-align: right;
+}
+
+
 
 p a{
     color: rgb(157, 211, 157);
@@ -106,9 +126,9 @@ h1{
     letter-spacing: 10px;
 }
 
-a{
+/* a{
     padding-top: 200px;
-}
+} */
 
 .section-2{
     background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
