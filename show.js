@@ -124,7 +124,7 @@ function addIngredientButton($ingredient) {
 function addIngredientEvent($button, ingredient) {
   $button.onclick = function(){
     const data = { shopping_list: ingredient };
-    
+
     fetch(userURL, {
       method: 'PUT',
       headers: {
