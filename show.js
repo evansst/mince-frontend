@@ -34,6 +34,9 @@ function displayPage(recipe) {
     
 }
 
+// Display Functions
+
+
 function displayProfileLink() {
   const $a = document.createElement('a');
   $a.href = `user.html?user_id=${user_id}`;
@@ -86,7 +89,7 @@ function displayIngredientList(recipe) {
   
   const $ingredients = recipe.ingredients.map(ingredientToElement);
 
-  if (user_id) { $ingredients.forEach(createIngredientButton); }
+  if (user_id) { $ingredients.forEach(addIngredientButton); }
   
   $ingredients.forEach($ingredient => {
     $ul.append($ingredient);
@@ -104,7 +107,7 @@ function ingredientToElement(ingredient) {
   return $li;
 }
   
-function createIngredientButton($ingredient) {
+function addIngredientButton($ingredient) {
   const $button = document.createElement('button');
   
   $button.className = 'button';

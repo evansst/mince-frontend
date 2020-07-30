@@ -17,17 +17,16 @@ const $section2 = document.querySelector('.section-2');
 const $section3 = document.querySelector('.section-3');
 
 const $ingredient_input = document.getElementById('ingredients_input');
-const $filterForm = document.querySelector('.form');
 
 fetch(userURL)
-  .then(parseJSON)
-  .then(displayUserNav);
+.then(parseJSON)
+.then(displayUserNav);
 
 fetch(recipeURL)
-    .then(parseJSON)
-    .then(displayPage);
-    
-    
+.then(parseJSON)
+.then(displayPage);
+
+
 function parseJSON(response) {
   return response.json();
 }
@@ -42,13 +41,7 @@ function displayUserNav(userResponse) {
 
 function displayPage(recipes) {
   displayProfileLink();
-
-  $filterForm.innerHTML = `  
-      <label for='ingredients_input' id='ingredients_header'>Let's Begin! Search Recipes below:</label>
-      <input type='text' id='ingredients_input' name='name'>
-      <input type="hidden" name='user_id' value=${user_id}>
-      <input type="submit" id='submit' value="Submit">
-    `;
+  displayFilterByName();
 
   recipes
     .map(recipeToElement)
@@ -74,6 +67,16 @@ function displayProfileLink() {
   if (user_id) {
     $ul.append($a);
   }
+}
+
+function displayFilterByName() {
+  const $filterForm = document.querySelector('.form');
+  $filterForm.innerHTML = `  
+      <label for='ingredients_input' id='ingredients_header'>Let's Begin! Search Recipes below:</label>
+      <input type='text' id='ingredients_input' name='name'>
+      <input type="hidden" name='user_id' value=${user_id}>
+      <input type="submit" id='submit' value="Submit">
+    `;
 }
 
 // Render filtered or sampled recipes
