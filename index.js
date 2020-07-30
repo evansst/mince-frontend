@@ -7,10 +7,12 @@ if (user_id == 'null') { user_id = null; }
 
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;
+const usersURL = `${baseURL}/users`;
 let userURL = `${baseURL}/users`;
 
+
 if (searchName) { recipeURL = `${recipeURL}?name=${searchName}`; } else { recipeURL = `${recipeURL}?sample=9`; }
-if (user_id) { userURL = `${userURL}/${user_id}`; }
+if (user_id) { userURL = `${usersURL}/${user_id}`; } else { userURL = usersURL; }
 
 const $header = document.querySelector('header');
 const $section1 = document.querySelector('.section-1');
@@ -125,25 +127,48 @@ function addSearchPlaceholder() {
 
 
 function displayLogIn(users) {
+  displayLogInForm(users);
+  displayCreateUserForm();
+}
+
+function displayLogInForm(users) {
   const $form = document.createElement('form');
   $form.innerHTML = `
     <form class='login_form' id='login'>
       <label for='login_input'>Username:</label>
     </form>`;
-
+  
   const $select = document.createElement('select');
   $select.name = 'user_id';
   const $submit = document.createElement('input');
-
+  
   $submit.type = 'submit';
   $submit.value = 'Login';
-
+  
   $form.append(addUserOptions($select, users), $submit);
-
+  
   const $user_nav = document.getElementById('user-nav');
     
   $user_nav.append($form);
   return users;
+}
+
+function displayCreateUserForm() {
+  const $form = document.createElement('form');
+  $form.method = 'POST';
+  $form.action = usersURL;
+  $form.innerHTML = `
+    <form>
+      <label for='username_input'>Create User:</label>
+      <input id='username_input' type='text' name='username' placeholder='Username'></input>
+      <input id='name_input' type='text' name='name' placeholder='Name'></input>
+      <input type='submit' value='Create User'></input>
+    </form>`;
+
+  const $user_nav = document.getElementById('user-nav');
+  $user_nav.append($form);
+  
+  return $form;
 }
 
 function displayLogOut(user) {
