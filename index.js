@@ -1,7 +1,11 @@
 
 const searchParams = new URLSearchParams(window.location.search);
 const searchName = searchParams.get('name');
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+
+if (user_id == 'null') { user_id = null; }
+
+
 
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;
@@ -12,12 +16,8 @@ let userURL = `${baseURL}/users/`;
 
 // Logic so we can still have the back-end controller return all recipes if we want
 
-if (searchName) {
-  recipeURL = `${recipeURL}?name=${searchName}`;
-} else {
-  recipeURL = `${recipeURL}?sample=9`;
-}
-
+recipeURL = (searchName) ?
+   `${recipeURL}?name=${searchName}` : `${recipeURL}?sample=9`;
 
 const $section1 = document.querySelector('.section-1');
 const $section2 = document.querySelector('.section-2');
