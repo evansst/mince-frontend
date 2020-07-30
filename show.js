@@ -1,6 +1,7 @@
 const searchParams = new URLSearchParams(window.location.search); 
 const recipe_id = searchParams.get('recipe_id');
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+if (user_id == 'null') { user_id = null; }
 
 const baseURL = "http://localhost:3000";
 const recipeURL = `${baseURL}/recipes/${recipe_id}`;
@@ -41,7 +42,7 @@ function displayProfileLink() {
 
   if (user_id) {
     $ul.append($a);
-  }
+}
 }
 
 function displayHomeLink() {
@@ -73,7 +74,7 @@ function displayImage(recipe) {
 
 function displayRecipeURL(recipe) {
   const $p = document.createElement('p');
-  $p.innerHTML = `<a class='recipe_url' href ='${recipe.url}'>Go To Full Recipe</a>`;
+  $p.innerHTML = `<a class='recipe_url' href ='${recipe.url}' target="_blank">Go To Full Recipe</a>`;
 
   $main.append($p);
 
