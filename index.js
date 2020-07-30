@@ -147,16 +147,15 @@ function displayLogIn(users) {
 }
 
 function displayLogOut(user) {
-  const $li1 = document.createElement('li');
-  const $li2 = document.createElement('li');
+  const $p = document.createElement('p');
+  const $a = document.createElement('a');
 
-  $li1.textContent = `Logged in as ${user.user_name}`;
-  $li2.innerHTML = `<a href='index.html'>Log Out</a>`;
+  $p.textContent = `Logged in as ${user.user_name}`;
+  $a.href = 'index.html';
+  $a.textContent = 'Log Out';
 
   const $user_nav = document.getElementById('user-nav');
-  const $ul = document.createElement('ul');
-  $ul.append($li1, $li2);
-  $user_nav.append($ul);
+  $user_nav.append($p, $a);
 
   return user;
 }
