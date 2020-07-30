@@ -1,12 +1,15 @@
 const searchParams = new URLSearchParams(window.location.search);
-const user_id = searchParams.get('user_id');
+let user_id = searchParams.get('user_id');
+
+if (user_id == 'null') { user_id = null; }
+
+const baseURL = "http://localhost:3000";
+const userURL = `${baseURL}/users/${user_id}`;
 
 const $header = document.querySelector('header');
 const $main = document.querySelector('main');
 $main.className = "user_page";
 
-const baseURL = "http://localhost:3000";
-const userURL = `${baseURL}/users/${user_id}`;
 
 fetch(userURL)
   .then(parseJSON)
@@ -23,14 +26,16 @@ function displayPage(user) {
 
   displaySectionHeader('Favorite Recipes', user);
   if (user.recipes) {
-    displayList(user.recipes, true);
+    displayFavoriteRecipes(user.recipes);
   }
   displaySectionHeader('Shopping List', user);
   if (user.shopping_list.ingredients) {
-    displayList(user.shopping_list.ingredients, false);
+    displayShoppingList(user.shopping_list.ingredients);
   }
 
 }
+
+// Display Functions
 
 function displayHomeLink() {
   const $a = document.createElement('a');
@@ -67,70 +72,110 @@ function displaySectionHeader(headerString, user) {
   return user;
 }
 
-function displayList(list, links) {
+function displayFavoriteRecipes(recipes) {
   const $ul = document.createElement('ul');
-  $ul.className = `item_list_${links}`;
+  $ul.className = `favorite_recipes`;
 
-  const $list = list.map(list_item => {
+  const $recipes = recipes.map(createFavoriteRecipe);
+
+  $recipes.forEach($recipe => {
+    $ul.append($recipe);
+  });
+  $main.append($ul);
+
+  return $ul;
+}
+
+function displayShoppingList(ingredients) {
+  const $ul = document.createElement('ul');
+  $ul.className = `shopping_list`;
+
+  const $ingredients = ingredients.map(ingredient => {
     const $li = document.createElement('li');
-    $li.className = `item_list_${links}`;
-    
-    if (links) {
-      $li.innerHTML = `<a href ='show.html?recipe_id=${list_item.id}&user_id=${user_id}'>${list_item.name}</a>`;
+    $li.className = `shopping_list`;
+    $li.innerText = ingredient;
 
-      list_item.ingredients.forEach(ingredient => {
-        const $p = document.createElement('p');
-        $p.className = 'ingredient_list';
-        $p.innerText = ingredient;
-        $li.append($p);
-  
-        const $button = document.createElement('button');
-        $button.className = 'button';
-        $button.id = 'button';
-        $button.innerText = '+';
-        $p.append($button);
-  
-        $button.onclick = function(){
-
-          const data = { shopping_list: ingredient };
-
-          fetch(userURL, {
-            method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(data),
-          })
-            .then(parseJSON)
-            .then(user => {
-              const $newIngredient = document.createElement('li');
-              const ingredients = user.shopping_list.ingredients;
-              const $ingredientList = document.querySelector('.item_list_false');
-
-              $newIngredient.textContent = ingredients[ingredients.length -1];
-
-              $ingredientList.append($newIngredient);
-
-            });
-
-        };
-      });   
-
-    } else {
-      $li.innerText = list_item;
-
-    }
-
-  
     return $li;
-
   });
 
   $main.append($ul);
-  $list.forEach($list => {
-    $ul.append($list);
-  });
-
+  $ingredients.forEach($ingredient => {
+    $ul.append($ingredient);
+  });  
 }
 
+function createFavoriteRecipe(recipe) {
+  const $recipe = createRecipeElement(recipe);
+  const $ingredientList = createIngredientListWithButtons(recipe);
+  $ingredientList.forEach($ingredient => {
+    $recipe.append($ingredient);
+  });
 
+  return $recipe;
+}
+
+function createRecipeElement(recipe) {
+  const $li = document.createElement('li');
+  $li.className = `favorite_recipes`;
+  $li.innerHTML = `<a href ='show.html?recipe_id=${recipe.id}&user_id=${user_id}'>${recipe.name}</a>`;
+
+  return $li;
+}
+
+function createIngredientListWithButtons(recipe) {
+  const $ingredientList = createIngredientList(recipe.ingredients);
+  $ingredientList.map(addIngredientButton);
+
+  return $ingredientList;
+}
+
+function createIngredientList(ingredients) {
+  const $ingredients = ingredients.map(ingredient => {
+    const $p = document.createElement('p');
+    $p.className = 'ingredient_list';
+    $p.textContent = ingredient;
+
+    return $p;
+  });
+  return $ingredients;
+}
+
+function addIngredientButton($ingredient) {
+  const $button = document.createElement('button');
+
+  $button.className = 'button';
+  $button.id = 'button';
+  $button.innerText = '+';
+  
+  createIngredientEvent($button, $ingredient.textContent);
+  $ingredient.append($button);
+  
+  return $ingredient;
+}
+
+function createIngredientEvent($button, ingredient) {
+  $button.onclick = function(){
+    const data = { shopping_list: ingredient };
+    
+    fetch(userURL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+      .then(parseJSON)
+      .then(addToShoppingList);
+  };
+  return $button;
+}
+
+function addToShoppingList(user) {
+  const $newIngredient = document.createElement('li');
+  const ingredients = user.shopping_list.ingredients;
+  const $ingredientList = document.querySelector('.shopping_list');
+
+  $newIngredient.textContent = ingredients[ingredients.length -1];
+
+  $ingredientList.append($newIngredient);
+}
