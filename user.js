@@ -1,5 +1,7 @@
+// let $newIngredient
 const searchParams = new URLSearchParams(window.location.search);
 let user_id = searchParams.get('user_id');
+
 
 if (user_id == 'null') { user_id = null; }
 
@@ -153,9 +155,48 @@ function addIngredientButton($ingredient) {
   return $ingredient;
 }
 
+
+function addToShoppingList(user, ingredient) {
+  const $newIngredient = document.createElement('li');
+  const ingredients = user.shopping_list.ingredients;
+  const $ingredientList = document.querySelector('.shopping_list');
+
+  $newIngredient.textContent = ingredients[ingredients.length -1];
+  $ingredientList.append($newIngredient);
+
+
+  const $minusButton = document.createElement('button')
+    
+  $minusButton.innerText = '-'
+  $newIngredient.append($minusButton);
+
+  $minusButton.onclick = function() {
+    const data = { shopping_list: ingredient, delete: true};
+
+    fetch(userURL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+    .then(parseJSON)
+    // .then(console.log)
+    .then(removeFromShoppingList);
+
+    function removeFromShoppingList() {
+      ingredients.pop;
+      // $newIngredient.textContent = "";
+      $ingredientList.removeChild($newIngredient)
+    }
+  }
+
+}
+
 function createIngredientEvent($button, ingredient) {
   $button.onclick = function(){
-    const data = { shopping_list: ingredient };
+    $button.style.backgroundcolor = '#287f8f'
+    const data = { shopping_list: ingredient};
     
     fetch(userURL, {
       method: 'PUT',
@@ -170,12 +211,16 @@ function createIngredientEvent($button, ingredient) {
   return $button;
 }
 
-function addToShoppingList(user) {
-  const $newIngredient = document.createElement('li');
-  const ingredients = user.shopping_list.ingredients;
-  const $ingredientList = document.querySelector('.shopping_list');
+function addIngredientButton($ingredient) {
+  const $button = document.createElement('button');
 
-  $newIngredient.textContent = ingredients[ingredients.length -1];
+  $button.className = 'button';
+  $button.id = 'button';
+  $button.innerText = '+';
+  
+  createIngredientEvent($button, $ingredient.textContent);
+  $ingredient.append($button);
 
-  $ingredientList.append($newIngredient);
+  
+  return $ingredient;
 }

@@ -1,4 +1,3 @@
-
 const searchParams = new URLSearchParams(window.location.search);
 const searchName = searchParams.get('name');
 let user_id = searchParams.get('user_id');
