@@ -12,11 +12,10 @@ let userURL = `${baseURL}/users`;
 if (searchName) { recipeURL = `${recipeURL}?name=${searchName}`; } else { recipeURL = `${recipeURL}?sample=9`; }
 if (user_id) { userURL = `${userURL}/${user_id}`; }
 
+const $header = document.querySelector('header');
 const $section1 = document.querySelector('.section-1');
 const $section2 = document.querySelector('.section-2');
 const $section3 = document.querySelector('.section-3');
-
-const $ingredient_input = document.getElementById('ingredients_input');
 
 fetch(userURL)
 .then(parseJSON)
@@ -37,23 +36,18 @@ function displayUserNav(userResponse) {
   } else {
     displayLogIn(userResponse);
   }
+  displayProfileLink();
 }
 
 function displayPage(recipes) {
-  displayProfileLink();
   displayFilterByName();
-
+  
   recipes
     .map(recipeToElement)
     .forEach(showRecipes);
   
-  if (searchName) {
-     $ingredient_input.placeholder = searchName;
+  addSearchPlaceholder();
 
-     $ingredient_input.onclick = function() {
-       $ingredient_input.placeholder = '';
-     };
-  }
   return recipes;
 }
 
@@ -62,10 +56,10 @@ function displayProfileLink() {
   $a.href = `user.html?user_id=${user_id}`;
   $a.textContent = 'Go to Profile';
 
-  const $ul = document.querySelector('ul.nav-bar');
+  const $div = document.querySelector('div.nav-bar');
 
   if (user_id) {
-    $ul.append($a);
+    $div.append($a);
   }
 }
 
@@ -108,6 +102,17 @@ function showRecipes($recipeCard) {
   $section3.append($recipeCard);
 }
 
+function addSearchPlaceholder() {
+  const $ingredient_input = document.getElementById('ingredients_input');
+  if (searchName) {
+     $ingredient_input.placeholder = searchName;
+
+     $ingredient_input.onclick = function() {
+       $ingredient_input.placeholder = '';
+     };
+  }
+}
+
 // What is this?
 
 // window.scroll({
@@ -131,12 +136,29 @@ function displayLogIn(users) {
   const $submit = document.createElement('input');
 
   $submit.type = 'submit';
-  $submit.value = 'Submit';
+  $submit.value = 'Login';
 
   $form.append(addUserOptions($select, users), $submit);
+
+  const $user_nav = document.getElementById('user-nav');
     
-  $section1.append($form);
+  $user_nav.append($form);
   return users;
+}
+
+function displayLogOut(user) {
+  const $li1 = document.createElement('li');
+  const $li2 = document.createElement('li');
+
+  $li1.textContent = `Logged in as ${user.user_name}`;
+  $li2.innerHTML = `<a href='index.html'>Log Out</a>`;
+
+  const $user_nav = document.getElementById('user-nav');
+  const $ul = document.createElement('ul');
+  $ul.append($li1, $li2);
+  $user_nav.append($ul);
+
+  return user;
 }
 
 function addUserOptions($select, users) {
@@ -151,13 +173,4 @@ function userToOption(user) {
   $option.innerText = user.user_name;
   $option.value = user.id;
   return $option;
-}
-
-function displayLogOut(user) {
-  const $p = document.createElement('p');
-  $p.innerHTML = `Logged in as ${user.user_name} <br> <a href='index.html'>Log Out</a>`;
-
-  $section1.append($p);
-
-  return user;
 }
