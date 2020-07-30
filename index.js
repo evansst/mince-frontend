@@ -20,12 +20,12 @@ const $section2 = document.querySelector('.section-2');
 const $section3 = document.querySelector('.section-3');
 
 fetch(userURL)
-.then(parseJSON)
-.then(displayUserNav);
+  .then(parseJSON)
+  .then(displayUserNav);
 
 fetch(recipeURL)
-.then(parseJSON)
-.then(displayPage);
+  .then(parseJSON)
+  .then(displayPage);
 
 
 function parseJSON(response) {
@@ -133,8 +133,9 @@ function displayLogIn(users) {
 
 function displayLogInForm(users) {
   const $form = document.createElement('form');
+  $form.className = 'user-nav';
   $form.innerHTML = `
-    <form class='login_form' id='login'>
+    <form>
       <label for='login_input'>Username:</label>
     </form>`;
   
@@ -147,9 +148,9 @@ function displayLogInForm(users) {
   
   $form.append(addUserOptions($select, users), $submit);
   
-  const $user_nav = document.getElementById('user-nav');
+  const $page_nav = document.getElementById('page-nav');
     
-  $user_nav.append($form);
+  $page_nav.append($form);
   return users;
 }
 
@@ -157,6 +158,7 @@ function displayCreateUserForm() {
   const $form = document.createElement('form');
   $form.method = 'POST';
   $form.action = usersURL;
+  $form.className = 'user-nav';
   $form.innerHTML = `
     <form>
       <label for='username_input'>Create User:</label>
@@ -176,8 +178,10 @@ function displayLogOut(user) {
   const $a = document.createElement('a');
 
   $p.textContent = `Logged in as ${user.user_name}`;
+  $p.className = 'user-nav';
   $a.href = 'index.html';
   $a.textContent = 'Log Out';
+  $a.className = 'user-nav';
 
   const $user_nav = document.getElementById('user-nav');
   $user_nav.append($p, $a);
