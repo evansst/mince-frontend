@@ -92,7 +92,7 @@ div#user-nav{
   justify-content: flex-end;
   flex-flow: column wrap;
 }
-div#user-nav > a, p, form {
+div#user-nav > a, p {
   display: flex;
   justify-content: flex-end;
 }
