@@ -43,7 +43,7 @@ function displayProfileLink() {
 
   if (user_id) {
     $ul.append($a);
-  }
+}
 }
 
 function displayHomeLink() {
@@ -75,7 +75,7 @@ function displayImage(recipe) {
 
 function displayRecipeURL(recipe) {
   const $p = document.createElement('p');
-  $p.innerHTML = `<a class='recipe_url' href ='${recipe.url}'>Go To Full Recipe</a>`;
+  $p.innerHTML = `<a class='recipe_url' href ='${recipe.url}' target="_blank">Go To Full Recipe</a>`;
 
   $main.append($p);
 
