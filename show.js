@@ -44,9 +44,7 @@ function displayProfileLink() {
 
   const $ul = document.querySelector('ul.nav-bar');
 
-  if (user_id) {
-    $ul.append($a);
-  }
+  $ul.append($a);
 }
 
 function displayHomeLink() {

@@ -6,10 +6,12 @@ if (user_id == 'null') { user_id = null; }
 
 const baseURL = "http://localhost:3000";
 let recipeURL = `${baseURL}/recipes`;
+const usersURL = `${baseURL}/users`;
 let userURL = `${baseURL}/users`;
 
+
 if (searchName) { recipeURL = `${recipeURL}?name=${searchName}`; } else { recipeURL = `${recipeURL}?sample=9`; }
-if (user_id) { userURL = `${userURL}/${user_id}`; }
+if (user_id) { userURL = `${usersURL}/${user_id}`; } else { userURL = usersURL; }
 
 const $header = document.querySelector('header');
 const $section1 = document.querySelector('.section-1');
@@ -17,12 +19,12 @@ const $section2 = document.querySelector('.section-2');
 const $section3 = document.querySelector('.section-3');
 
 fetch(userURL)
-.then(parseJSON)
-.then(displayUserNav);
+  .then(parseJSON)
+  .then(displayUserNav);
 
 fetch(recipeURL)
-.then(parseJSON)
-.then(displayPage);
+  .then(parseJSON)
+  .then(displayPage);
 
 
 function parseJSON(response) {
@@ -124,38 +126,64 @@ function addSearchPlaceholder() {
 
 
 function displayLogIn(users) {
+  displayLogInForm(users);
+  displayCreateUserForm();
+}
+
+function displayLogInForm(users) {
   const $form = document.createElement('form');
+  $form.className = 'user-nav';
   $form.innerHTML = `
-    <form class='login_form' id='login'>
+    <form>
       <label for='login_input'>Username:</label>
     </form>`;
-
+  
   const $select = document.createElement('select');
   $select.name = 'user_id';
   const $submit = document.createElement('input');
-
+  
   $submit.type = 'submit';
   $submit.value = 'Login';
-
+  
   $form.append(addUserOptions($select, users), $submit);
-
-  const $user_nav = document.getElementById('user-nav');
+  
+  const $page_nav = document.getElementById('page-nav');
     
-  $user_nav.append($form);
+  $page_nav.append($form);
   return users;
 }
 
-function displayLogOut(user) {
-  const $li1 = document.createElement('li');
-  const $li2 = document.createElement('li');
-
-  $li1.textContent = `Logged in as ${user.user_name}`;
-  $li2.innerHTML = `<a href='index.html'>Log Out</a>`;
+function displayCreateUserForm() {
+  const $form = document.createElement('form');
+  $form.method = 'POST';
+  $form.action = usersURL;
+  $form.className = 'user-nav';
+  $form.innerHTML = `
+    <form>
+      <label for='username_input'>Create User:</label>
+      <input id='username_input' type='text' name='username' placeholder='Username'></input>
+      <input id='name_input' type='text' name='name' placeholder='Name'></input>
+      <input type='submit' value='Create User'></input>
+    </form>`;
 
   const $user_nav = document.getElementById('user-nav');
-  const $ul = document.createElement('ul');
-  $ul.append($li1, $li2);
-  $user_nav.append($ul);
+  $user_nav.append($form);
+  
+  return $form;
+}
+
+function displayLogOut(user) {
+  const $p = document.createElement('p');
+  const $a = document.createElement('a');
+
+  $p.textContent = `Logged in as ${user.user_name}`;
+  $p.className = 'user-nav';
+  $a.href = 'index.html';
+  $a.textContent = 'Log Out';
+  $a.className = 'user-nav';
+
+  const $user_nav = document.getElementById('user-nav');
+  $user_nav.append($p, $a);
 
   return user;
 }
