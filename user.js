@@ -1,5 +1,7 @@
+// let $newIngredient
 const searchParams = new URLSearchParams(window.location.search);
 let user_id = searchParams.get('user_id');
+
 
 if (user_id == 'null') { user_id = null; }
 
@@ -99,6 +101,8 @@ function displayShoppingList(ingredients) {
   });
 
   $main.append($ul);
+
+  $ingredients.forEach(addRemoveButton);
   $ingredients.forEach($ingredient => {
     $ul.append($ingredient);
   });  
@@ -106,7 +110,7 @@ function displayShoppingList(ingredients) {
 
 function createFavoriteRecipe(recipe) {
   const $recipe = createRecipeElement(recipe);
-  const $ingredientList = createIngredientListWithButtons(recipe);
+  const $ingredientList = createIngredientListWithAddButtons(recipe);
   $ingredientList.forEach($ingredient => {
     $recipe.append($ingredient);
   });
@@ -122,7 +126,7 @@ function createRecipeElement(recipe) {
   return $li;
 }
 
-function createIngredientListWithButtons(recipe) {
+function createIngredientListWithAddButtons(recipe) {
   const $ingredientList = createIngredientList(recipe.ingredients);
   $ingredientList.map(addIngredientButton);
 
@@ -153,9 +157,61 @@ function addIngredientButton($ingredient) {
   return $ingredient;
 }
 
+
+function addToShoppingList(user) {
+  const $newIngredient = document.createElement('li');
+  const ingredients = user.shopping_list.ingredients;
+  const $ingredientList = document.querySelector('.shopping_list');
+
+  $newIngredient.textContent = ingredients[ingredients.length -1];
+  addRemoveButton($newIngredient);
+
+  $ingredientList.append($newIngredient);
+}
+
+function addRemoveButton($ingredient) {
+  const $minusButton = document.createElement('button');
+    
+  $minusButton.innerText = '-';
+  createRemoveEvent($minusButton, $ingredient);
+    
+  $ingredient.append($minusButton);
+  return $minusButton;
+}
+
+function createRemoveEvent($button, $ingredient) {
+  const ingredient = $ingredient.textContent;
+
+  $button.onclick = function() {
+    const data = { 
+      shopping_list: ingredient,
+      delete: true };
+
+    fetch(userURL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    removeIngredient($ingredient);
+  };
+
+  return $button;
+}
+
+function removeIngredient($ingredient) {
+  const $shoppingList = document.querySelector('ul.shopping_list');
+
+  $shoppingList.removeChild($ingredient);
+}
+
 function createIngredientEvent($button, ingredient) {
   $button.onclick = function(){
-    const data = { shopping_list: ingredient };
+
+    $button.style.backgroundcolor = '#287f8f';
+
+    const data = { shopping_list: ingredient};
     
     fetch(userURL, {
       method: 'PUT',
@@ -170,12 +226,16 @@ function createIngredientEvent($button, ingredient) {
   return $button;
 }
 
-function addToShoppingList(user) {
-  const $newIngredient = document.createElement('li');
-  const ingredients = user.shopping_list.ingredients;
-  const $ingredientList = document.querySelector('.shopping_list');
+function addIngredientButton($ingredient) {
+  const $button = document.createElement('button');
 
-  $newIngredient.textContent = ingredients[ingredients.length -1];
+  $button.className = 'button';
+  $button.id = 'button';
+  $button.innerText = '+';
+  
+  createIngredientEvent($button, $ingredient.textContent);
+  $ingredient.append($button);
 
-  $ingredientList.append($newIngredient);
+  
+  return $ingredient;
 }

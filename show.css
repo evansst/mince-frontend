@@ -111,6 +111,9 @@ ul.nav-bar{
     margin-top: 20px;
     font-weight: bold;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
 }
 
 .nav-bar a:hover{
@@ -149,6 +152,12 @@ li{
 button{
     border-radius: 5em;
     background-color: white;
+    margin-left: 7px; 
+}
+
+.buttonChange{
+    border-radius: 5em;
+    background-color: blue;
     margin-left: 7px; 
 }
 

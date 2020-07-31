@@ -92,9 +92,10 @@ div#user-nav{
   justify-content: flex-end;
   flex-flow: column wrap;
 }
-div#user-nav > a, p {
+
+form#user-nav {
   display: flex;
-  justify-content: flex-end;
+  justify-content: right;
 }
 
 
@@ -225,4 +226,3 @@ h3 {
     padding: 3px 3px 6px;
     font-weight: bolder;
 }
-

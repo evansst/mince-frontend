@@ -44,9 +44,7 @@ function displayProfileLink() {
 
   const $ul = document.querySelector('ul.nav-bar');
 
-  if (user_id) {
-    $ul.append($a);
-  }
+  $ul.append($a);
 }
 
 function displayHomeLink() {
@@ -124,7 +122,7 @@ function addIngredientButton($ingredient) {
 function addIngredientEvent($button, ingredient) {
   $button.onclick = function(){
     const data = { shopping_list: ingredient };
-    
+
     fetch(userURL, {
       method: 'PUT',
       headers: {
