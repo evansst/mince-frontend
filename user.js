@@ -23,6 +23,7 @@ function parseJSON(response) {
 
 function displayPage(user) {
   displayHomeLink();
+  displayDeleteUser();
   displayTitle(user);
   displayHeader(user);
 
@@ -44,6 +45,17 @@ function displayHomeLink() {
   $a.href = `index.html?user_id=${user_id}`;
   $a.textContent = 'Go to Homepage';
 
+  const $ul = document.querySelector('ul.nav-bar');
+  $ul.append($a); 
+}
+
+function displayDeleteUser() {
+  const $a = document.createElement('a');
+  $a.textContent = 'Delete User Account';
+  $a.id = 'delete-user';
+  
+  addDeleteLink($a);
+  
   const $ul = document.querySelector('ul.nav-bar');
   $ul.append($a); 
 }
@@ -239,4 +251,15 @@ function addIngredientButton($ingredient) {
 
   
   return $ingredient;
+}
+
+function addDeleteLink($a) {
+  $a.onclick = function () {
+    return fetch(userURL, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      }, 
+    });
+  };
 }
