@@ -12,22 +12,15 @@ const recipe_cardURL = `${baseURL}/recipe_cards`;
 const $header = document.querySelector('header');
 const $main = document.querySelector('main');
 
-
 fetch(recipeURL)
     .then(parseJSON)
     .then(displayPage);
-
-
-function parseJSON(response) {
-  return response.json();
-}
-
 
 function displayPage(recipe) {
   if (user_id) { displayProfileLink(); }
   displayHomeLink();
   displayHeader(recipe);
-  displayImage(recipe);
+  displayRecipeImage(recipe);
   displayRecipeURL(recipe);
   if (user_id) { displayFavoriteButton(recipe); }
   displayIngredientList(recipe);
@@ -35,7 +28,6 @@ function displayPage(recipe) {
 }
 
 // Display Functions
-
 
 function displayProfileLink() {
   const $a = document.createElement('a');
@@ -65,7 +57,7 @@ function displayHeader(recipe) {
   return recipe;
 }
 
-function displayImage(recipe) {
+function displayRecipeImage(recipe) {
   const $r_image = document.createElement('img');
   $r_image.src = recipe.image;
 
@@ -106,6 +98,8 @@ function ingredientToElement(ingredient) {
   
   return $li;
 }
+
+// Ingredient Buttons 
   
 function addIngredientButton($ingredient) {
   const $button = document.createElement('button');
@@ -133,6 +127,8 @@ function addIngredientEvent($button, ingredient) {
     });
   };
 }
+
+// Add recipe to favorites list button
 
 function displayFavoriteButton(recipe) {
   const $button = createFavoritebutton(recipe);
@@ -169,5 +165,6 @@ function addFavoriteEvent($button, recipe) {
   return $button;
 }
 
-
-
+function parseJSON(response) {
+  return response.json();
+}
