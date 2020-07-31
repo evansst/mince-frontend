@@ -1,7 +1,5 @@
-// let $newIngredient
 const searchParams = new URLSearchParams(window.location.search);
 let user_id = searchParams.get('user_id');
-
 
 if (user_id == 'null') { user_id = null; }
 
@@ -10,35 +8,31 @@ const userURL = `${baseURL}/users/${user_id}`;
 
 const $header = document.querySelector('header');
 const $main = document.querySelector('main');
-$main.className = "user_page";
-
 
 fetch(userURL)
   .then(parseJSON)
   .then(displayPage);
 
-function parseJSON(response) {
-  return response.json();
-}
-
 function displayPage(user) {
+  displayTitle(user);
   displayHomeLink();
   displayDeleteUser();
-  displayTitle(user);
   displayHeader(user);
 
   displaySectionHeader('Favorite Recipes', user);
-  if (user.recipes) {
-    displayFavoriteRecipes(user.recipes);
-  }
+  if (user.recipes) { displayFavoriteRecipes(user.recipes); }
   displaySectionHeader('Shopping List', user);
-  if (user.shopping_list.ingredients) {
-    displayShoppingList(user.shopping_list.ingredients);
-  }
-
+  if (user.shopping_list.ingredients) { displayShoppingList(user.shopping_list.ingredients); }
 }
 
 // Display Functions
+
+function displayTitle(user) {
+  const $title = document.querySelector('title');
+  $title.textContent = user.username;
+
+  return user;
+}
 
 function displayHomeLink() {
   const $a = document.createElement('a');
@@ -58,13 +52,6 @@ function displayDeleteUser() {
   
   const $ul = document.querySelector('ul.nav-bar');
   $ul.append($a); 
-}
-
-function displayTitle(user) {
-  const $title = document.querySelector('title');
-  $title.textContent = user.username;
-
-  return user;
 }
 
 function displayHeader(user) {
@@ -119,6 +106,8 @@ function displayShoppingList(ingredients) {
     $ul.append($ingredient);
   });  
 }
+
+
 
 function createFavoriteRecipe(recipe) {
   const $recipe = createRecipeElement(recipe);
@@ -262,4 +251,8 @@ function addDeleteLink($a) {
       }, 
     });
   };
+}
+
+function parseJSON(response) {
+  return response.json();
 }
