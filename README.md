@@ -22,7 +22,9 @@ Mince is a full-stack web application that pulls from over 5,000 existing recipe
 
 ## Technologies
 Ruby - version 2.6.1
+
 PostgreSQL - version 12.3
+
 HTML5 / CSS3
 
 ## Setup
