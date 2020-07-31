@@ -161,6 +161,10 @@ button{
     margin-left: 7px; 
 }
 
+#delete-user:hover{
+  cursor: pointer;
+}
+
 button:hover{
     cursor: pointer;
 }
