@@ -18,7 +18,7 @@ Mince is a full-stack web application that pulls from over 5,000 existing recipe
 
 
 ## Mince Walkthrough Video
-<!-- [Mince Walkthrough](https://youtu.be/eMHFxcF2l08) -->
+[Mince Walkthrough](https://youtu.be/ZKes0aGDM6A)
 
 ## Technologies
 Ruby - version 2.6.1
@@ -26,11 +26,7 @@ PostgreSQL - version 12.3
 HTML5 / CSS3
 
 ## Setup
-To run this project, install it locally by cloning the GitHub repository and type:
-```
-  
-
-```
+To run this project, please go to the [Mince Backend repo:](https://github.com/NyaradzoUBere/mince-backend)
 ## Code Examples
 
 ```
