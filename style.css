@@ -26,45 +26,45 @@ time, mark, audio, video {
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
 footer, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
 body {
-    line-height: 1;
+  line-height: 1;
 }
 ol, ul {
-    list-style: none;
+  list-style: none;
 }
 blockquote, q {
-    quotes: none;
+  quotes: none;
 }
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
+  content: '';
 	content: none;
 }
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 	border-spacing: 0;
 }
 
 /* END OF MEYER RESET */
 
 .nav-bar a{
-    text-decoration: none;
-    font-family: Palatino;
-    font-size: 17px;
-    letter-spacing: 2px;
-    font-size-adjust: 0.5;
-    word-wrap: break-word;
-    text-shadow: 0px 0px 0px;
-    color: rgb(157, 211, 157);
-   
+  text-decoration: none;
+  font-family: Palatino;
+  font-size: 17px;
+  letter-spacing: 2px;
+  font-size-adjust: 0.5;
+  word-wrap: break-word;
+  text-shadow: 0px 0px 0px;
+  color: rgb(157, 211, 157);
+  
 }
 
 .nav-bar a:hover{
-    color: #287f8f;
-    border-top: 4px solid black;
-    text-transform: none;
+  color: #287f8f;
+  border-top: 4px solid black;
+  text-transform: none;
 }
 header {
   display: flex;
@@ -102,101 +102,104 @@ form#user-nav {
 
 
 p a{
-    color: rgb(157, 211, 157);
-    font-weight: bold;
+  color: rgb(157, 211, 157);
+  font-weight: bold;
 }
 
 p a:hover{
-    color: #287f8f;
-    font-weight: bolder;
+  color: #287f8f;
+  font-weight: bolder;
 }
 
 a{
-    text-decoration: none;
-    color: rgb(145, 211, 145);
-    font-family: Palatino;
-    letter-spacing: 2px;
-    font-size-adjust: 0.5;
-    word-wrap: break-word;
+  text-decoration: none;
+  color: rgb(145, 211, 145);
+  font-family: Palatino;
+  letter-spacing: 2px;
+  font-size-adjust: 0.5;
+  word-wrap: break-word;
 }
 
 .section-1{
-    background-color: white;
-    text-align: center;
-    margin: 100px 100px;
+  background-color: white;
+  text-align: center;
+  margin: 100px 100px;
 
 }
+
 h1{
-    font-family: Palatino;
-    font-size: 70px;
-    letter-spacing: 10px;
+  font-family: Palatino;
+  font-size: 70px;
+  letter-spacing: 10px;
 }
 
 .section-2{
-    background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    max-width:100%;
-    max-height:100%;
+  background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-width:100%;
+  max-height:100%;
 }
 
 #filter{
-    text-align: center;
-    margin: 100px 100px;
-    padding: 100px 100px;
+  text-align: center;
+  margin: 100px 100px;
+  padding: 100px 100px;
 }
 
 #ingredients_header{
-    font-weight: bolder;
-    font-family: Palatino;
-    color: black;
-    font-size: 25px;
-    text-shadow: 5px 2px white;
-    display: unset;
+  font-weight: bolder;
+  font-family: Palatino;
+  color: black;
+  font-size: 25px;
+  text-shadow: 5px 2px white;
+  display: unset;
 }
+
 #ingredients_input{
-    color: black;
-    font-family: Palatino;
-    margin: 50px 50px;
-    height: 30px;
-    width: 400px;
-    border-style: dotted;
-    border-radius: 10px;
-    font-size: 20px;
+  color: black;
+  font-family: Palatino;
+  margin: 50px 50px;
+  height: 30px;
+  width: 400px;
+  border-style: dotted;
+  border-radius: 10px;
+  font-size: 20px;
 }
 
 #submit{
-    padding: 5px 5px;
-    font-size: 15px;
-    font-family: Palatino;
-    font-weight: bold;
-    color: black;
-    background-color: white;
-    border-style: dotted;
-    border-radius: 10px;
+  padding: 5px 5px;
+  font-size: 15px;
+  font-family: Palatino;
+  font-weight: bold;
+  color: black;
+  background-color: white;
+  border-style: dotted;
+  border-radius: 10px;
 }
 
 #submit:hover{
-    background-color: #B8D0EB;
-    color: black;
-    cursor: pointer;
-    transform: scale(1.05);
+  background-color: #B8D0EB;
+  color: black;
+  cursor: pointer;
+  transform: scale(1.05);
 }
 
 .section-3-header {
   display: flex;
   justify-content: center;
 }
+
 h1#recipe-list-header {
   font-size: 40px;  
 }
 
 .section-3{
-    display: flex;
-    flex-wrap: wrap;
-    margin: 10px 10%;
-  }
-  
+  display: flex;
+  flex-wrap: wrap;
+  margin: 10px 10%;
+}
+
 .cards {
   margin: 1rem;
   padding: 1rem;
@@ -209,17 +212,17 @@ h1#recipe-list-header {
 }
 
 img{
-    height: 80%;
-    border-radius: 50px;
+  height: 80%;
+  border-radius: 50px;
 }
 
 .cards:hover{
-    transform: scale(1.05);
-    cursor: pointer;
+  transform: scale(1.05);
+  cursor: pointer;
 }
 
 h3 {
-    margin: 3px 3px 6px;
-    padding: 3px 3px 6px;
-    font-weight: bolder;
+  margin: 3px 3px 6px;
+  padding: 3px 3px 6px;
+  font-weight: bolder;
 }
