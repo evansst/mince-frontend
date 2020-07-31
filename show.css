@@ -152,6 +152,12 @@ button{
     margin-left: 7px; 
 }
 
+.buttonChange{
+    border-radius: 5em;
+    background-color: blue;
+    margin-left: 7px; 
+}
+
 button:hover{
     cursor: pointer;
 }
