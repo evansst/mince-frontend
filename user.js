@@ -176,6 +176,7 @@ function addRemoveButton($ingredient) {
   createRemoveEvent($minusButton, $ingredient);
     
   $ingredient.append($minusButton);
+
   return $minusButton;
 }
 
@@ -209,7 +210,7 @@ function removeIngredient($ingredient) {
 function createIngredientEvent($button, ingredient) {
   $button.onclick = function(){
 
-    $button.style.backgroundcolor = '#287f8f';
+    $button.style.backgroundColor = 'lightblue';
 
     const data = { shopping_list: ingredient};
     
