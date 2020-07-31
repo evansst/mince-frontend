@@ -51,7 +51,6 @@ table {
 
 .nav-bar a{
     text-decoration: none;
-    /* color: #2eb7cf; */
     font-family: Palatino;
     font-size: 17px;
     letter-spacing: 2px;
@@ -74,12 +73,12 @@ header {
 }
 
 .nav-bar{
-    margin-top: 20px;
-    font-weight: bold;
-    text-decoration: none;
-    margin: 20px 20px;
-    white-space: nowrap;
-    padding: 20px;
+  margin-top: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  margin: 20px 20px;
+  white-space: nowrap;
+  padding: 20px;
 }
   
 div#page-nav{
@@ -114,7 +113,6 @@ p a:hover{
 
 a{
     text-decoration: none;
-    /* color: #82a8d3; */
     color: rgb(145, 211, 145);
     font-family: Palatino;
     letter-spacing: 2px;
@@ -134,7 +132,6 @@ h1{
     letter-spacing: 10px;
 }
 
-
 .section-2{
     background-image: url("images/ala--lHZUkiWM74-unsplash.jpg");
     background-repeat: no-repeat;
@@ -142,7 +139,6 @@ h1{
     max-width:100%;
     max-height:100%;
 }
-
 
 #filter{
     text-align: center;
@@ -161,7 +157,6 @@ h1{
 #ingredients_input{
     color: black;
     font-family: Palatino;
-    /* font-weight: bold; */
     margin: 50px 50px;
     height: 30px;
     width: 400px;
@@ -186,6 +181,14 @@ h1{
     color: black;
     cursor: pointer;
     transform: scale(1.05);
+}
+
+.section-3-header {
+  display: flex;
+  justify-content: center;
+}
+h1#recipe-list-header {
+  font-size: 40px;  
 }
 
 .section-3{
