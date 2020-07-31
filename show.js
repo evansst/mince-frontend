@@ -136,10 +136,8 @@ function addIngredientEvent($button, ingredient) {
 
 function displayFavoriteButton(recipe) {
   const $button = createFavoritebutton(recipe);
+  
   $main.append($button);
-  $button.onclick = function(){
-    $button.style.backgroundColor = '#9dd39d';
-  }
 }
 
 function createFavoritebutton(recipe) {
@@ -154,6 +152,7 @@ function createFavoritebutton(recipe) {
 
 function addFavoriteEvent($button, recipe) {
   $button.onclick = function () {
+    $button.style.backgroundColor = '#9dd39d';
     const data = {
       user_id: parseInt(user_id),
       recipe_id: recipe.id
