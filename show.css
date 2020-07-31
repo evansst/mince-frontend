@@ -111,6 +111,9 @@ ul.nav-bar{
     margin-top: 20px;
     font-weight: bold;
     text-decoration: none;
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
 }
 
 .nav-bar a:hover{
