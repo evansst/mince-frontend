@@ -121,7 +121,7 @@ function addIngredientButton($ingredient) {
   
 function addIngredientEvent($button, ingredient) {
   $button.onclick = function(){
-    $button.style.backgroundColor = 'lightblue';
+    $button.style.backgroundColor = '#9dd39d';
     const data = { shopping_list: ingredient };
 
     fetch(userURL, {
@@ -138,7 +138,7 @@ function displayFavoriteButton(recipe) {
   const $button = createFavoritebutton(recipe);
   $main.append($button);
   $button.onclick = function(){
-    $button.style.backgroundColor = 'lightblue';
+    $button.style.backgroundColor = '#9dd39d';
   }
 }
 

@@ -210,7 +210,7 @@ function removeIngredient($ingredient) {
 function createIngredientEvent($button, ingredient) {
   $button.onclick = function(){
 
-    $button.style.backgroundColor = 'lightblue';
+    $button.style.backgroundColor = '#9dd39d';
 
     const data = { shopping_list: ingredient};
     
